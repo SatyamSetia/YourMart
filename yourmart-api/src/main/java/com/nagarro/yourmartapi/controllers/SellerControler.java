@@ -6,20 +6,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nagarro.yourmartapi.dto.LoginSignupResp;
+import com.nagarro.yourmartapi.dto.RegisterSeller;
 import com.nagarro.yourmartapi.dto.Response;
-import com.nagarro.yourmartapi.models.Admin;
-import com.nagarro.yourmartapi.services.AdminService;
+import com.nagarro.yourmartapi.services.SellerService;
 
 @RestController
-public class AdminController {
+public class SellerControler {
 	
 	@Autowired
-	private AdminService adminService;
+	private SellerService sellerService;
 	
-	@PostMapping("/admin/login")
-	public Response<LoginSignupResp> authenticateAdmin(@RequestBody Admin admin) {
-		
-		return adminService.authenticate(admin);
-		
+	@PostMapping("/seller/register")
+	public Response<LoginSignupResp> authenticateAdmin(@RequestBody RegisterSeller sellerBeforeRegistration) {
+		return this.sellerService.registerSeller(sellerBeforeRegistration);		
 	}
+
 }
