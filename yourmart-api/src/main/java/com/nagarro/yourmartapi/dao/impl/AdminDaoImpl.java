@@ -14,8 +14,6 @@ import com.nagarro.yourmartapi.models.Admin;
 import com.nagarro.yourmartapi.utils.HibernateUtils;
 import com.nagarro.yourmartapi.utils.TokenUtils;
 
-import antlr.Token;
-
 @Component
 public class AdminDaoImpl implements AdminDao{
 	
