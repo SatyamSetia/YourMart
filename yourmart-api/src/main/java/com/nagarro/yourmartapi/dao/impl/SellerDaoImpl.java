@@ -13,6 +13,7 @@ import com.nagarro.yourmartapi.dao.SellerDao;
 import com.nagarro.yourmartapi.dto.LoginSignupResp;
 import com.nagarro.yourmartapi.dto.RegisterSeller;
 import com.nagarro.yourmartapi.dto.Response;
+import com.nagarro.yourmartapi.dto.SellerStatus;
 import com.nagarro.yourmartapi.models.Seller;
 import com.nagarro.yourmartapi.models.SellerDetails;
 import com.nagarro.yourmartapi.utils.HibernateUtils;
@@ -107,6 +108,23 @@ public class SellerDaoImpl implements SellerDao {
 		}
 		
 		return response;
+	}
+
+
+	public Response<String> updateSellerStatus(Integer sellerId, SellerStatus sellerStatus) {
+		
+		Seller seller = (Seller) this.session.load(Seller.class,sellerId);
+		seller.setStatus(sellerStatus.getStatus());
+		
+		this.session.beginTransaction();
+		
+		try {
+			this.session.getTransaction().commit();
+		} catch(Exception exp) {
+			System.out.println(exp);
+		}
+		
+		return null;
 	}
 
 }

@@ -7,6 +7,7 @@ import com.nagarro.yourmartapi.dao.SellerDao;
 import com.nagarro.yourmartapi.dto.LoginSignupResp;
 import com.nagarro.yourmartapi.dto.RegisterSeller;
 import com.nagarro.yourmartapi.dto.Response;
+import com.nagarro.yourmartapi.dto.SellerStatus;
 import com.nagarro.yourmartapi.models.Seller;
 import com.nagarro.yourmartapi.services.SellerService;
 
@@ -22,6 +23,10 @@ public class SellerServiceImpl implements SellerService {
 	
 	public Response<LoginSignupResp> authenticateSeller(Seller sellerBeforeLogin) {
 		return this.sellerDao.getSeller(sellerBeforeLogin);
+	}
+
+	public Response<String> updateSellerStatus(Integer sellerId, SellerStatus sellerStatus) {
+		return this.sellerDao.updateSellerStatus(sellerId, sellerStatus);
 	}
 
 }
