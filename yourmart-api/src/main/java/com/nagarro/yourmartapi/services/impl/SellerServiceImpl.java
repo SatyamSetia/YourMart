@@ -36,4 +36,8 @@ public class SellerServiceImpl implements SellerService {
 		return this.sellerDao.getAllSellers(sortBy, status);
 	}
 
+	public Response<SellerResp> fetchSellerById(Integer sellerId) {
+		return this.sellerDao.getSellerById(sellerId);
+	}
+
 }

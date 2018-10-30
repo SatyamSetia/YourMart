@@ -19,4 +19,6 @@ public interface SellerDao {
 
 	public Response<List<SellerResp>> getAllSellers(List<String> sortBy, String status);
 
+	public Response<SellerResp> getSellerById(Integer SellerId);
+
 }

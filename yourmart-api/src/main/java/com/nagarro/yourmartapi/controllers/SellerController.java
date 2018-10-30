@@ -45,5 +45,10 @@ public class SellerController {
 	public Response<List<SellerResp>> fetchAllSellers(@RequestParam(value="sortBy", required=false) List<String> sortBy, @RequestParam(value="status", required=false) String status) {
 		return this.sellerService.fetchAllSellers(sortBy,status);
 	}
+	
+	@GetMapping("/sellers/{sellerId}")
+	public Response<SellerResp> fetchSellerById(@PathVariable Integer sellerId) {
+		return this.sellerService.fetchSellerById(sellerId);
+	}
 
 }

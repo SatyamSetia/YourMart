@@ -176,4 +176,31 @@ public class SellerDaoImpl implements SellerDao {
 		return response;
 	}
 
+
+	public Response<SellerResp> getSellerById(Integer sellerId) {
+		
+		Query query = this.session.createQuery(HqlQueries.SELECT_SELLER_BY_ID_FROM_TABLE);
+		query.setParameter("sellerId", sellerId);
+		
+		List<SellerDetails> sellerList = query.list();
+		
+		SellerDetails seller = sellerList.get(0);
+		
+		SellerResp sellerResp = new SellerResp();
+		
+		sellerResp.setUsername(seller.getSeller().getUsername());
+		sellerResp.setSellerId(seller.getSeller().getSellerId());
+		sellerResp.setAddress(seller.getAddress());
+		sellerResp.setCompany(seller.getCompany());
+		sellerResp.setEmail(seller.getEmail());
+		sellerResp.setGstNumber(seller.getGstNumber());
+		sellerResp.setOwnerName(seller.getOwnerName());
+		sellerResp.setTelephone(seller.getTelephone());
+		sellerResp.setStatus(seller.getSeller().getStatus());
+		
+		Response<SellerResp> response = new Response<SellerResp>(200, sellerResp, null);
+		
+		return response;
+	}
+
 }

@@ -19,4 +19,6 @@ public interface SellerService {
 
 	public Response<List<SellerResp>> fetchAllSellers(List<String> sortBy, String status);
 
+	public Response<SellerResp> fetchSellerById(Integer sellerId);
+
 }

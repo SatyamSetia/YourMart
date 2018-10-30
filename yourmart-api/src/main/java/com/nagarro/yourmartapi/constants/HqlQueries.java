@@ -11,5 +11,7 @@ public class HqlQueries {
 	public static final String SELECT_SELLER_FROM_TABLE = "SELECT dbSeller.sellerId, dbSeller.username, dbSeller.status FROM "+ Models.SELLER_MODEL + " as dbSeller where dbSeller.username= :username AND dbSeller.password= :password";
 	
 	public static final String SELECT_SELLERS_FROM_TABLE = "FROM " + Models.SELLER_DETAILS_MODEL + " as dbSellerDetails";
+	
+	public static final String SELECT_SELLER_BY_ID_FROM_TABLE = "FROM " + Models.SELLER_DETAILS_MODEL + " as dbSellerDetails WHERE dbSellerDetails.seller.sellerId = :sellerId";
 
 }
