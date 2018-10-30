@@ -1,6 +1,8 @@
 package com.nagarro.yourmartapi.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -13,6 +15,7 @@ import com.nagarro.yourmartapi.dao.SellerDao;
 import com.nagarro.yourmartapi.dto.LoginSignupResp;
 import com.nagarro.yourmartapi.dto.RegisterSeller;
 import com.nagarro.yourmartapi.dto.Response;
+import com.nagarro.yourmartapi.dto.SellerResp;
 import com.nagarro.yourmartapi.dto.SellerStatus;
 import com.nagarro.yourmartapi.models.Seller;
 import com.nagarro.yourmartapi.models.SellerDetails;
@@ -124,6 +127,53 @@ public class SellerDaoImpl implements SellerDao {
 		}
 		
 		return null;
+	}
+
+	public Response<List<SellerResp>> getAllSellers(List<String> sortBy, String status) {
+		
+		String whereClause = "";
+		String sortOrder = "";
+		
+		if(!Objects.isNull(status)) {
+			whereClause = " WHERE dbSellerDetails.seller.status = '" + status + "'"; 
+		} else {
+			sortOrder = " ORDER BY FIELD(dbSellerDetails.seller.status, 'NEED_APPROVAL','APPROVED','REJECTED')";
+		}
+		
+		if(!Objects.isNull(sortBy)) {
+			for(String column: sortBy) {
+				sortOrder +=", dbSellerDetails.seller."+column;
+			}
+		}
+		
+		Query query = this.session.createQuery(HqlQueries.SELECT_SELLERS_FROM_TABLE + whereClause + sortOrder);
+		
+		System.out.println(query.getQueryString());
+		
+		List<SellerDetails> list = query.list();
+		
+		List<SellerResp> sellerList = new ArrayList<SellerResp>();
+		Response<List<SellerResp>> response;
+		
+		for(SellerDetails seller: list) {
+			SellerResp sellerResp = new SellerResp();
+			
+			sellerResp.setUsername(seller.getSeller().getUsername());
+			sellerResp.setSellerId(seller.getSeller().getSellerId());
+			sellerResp.setStatus(seller.getSeller().getStatus());
+			sellerResp.setAddress(seller.getAddress());
+			sellerResp.setCompany(seller.getCompany());
+			sellerResp.setEmail(seller.getEmail());
+			sellerResp.setGstNumber(seller.getGstNumber());
+			sellerResp.setOwnerName(seller.getOwnerName());
+			sellerResp.setTelephone(seller.getTelephone());
+			
+			sellerList.add(sellerResp);
+		}
+		
+		response = new Response<List<SellerResp>>(ResponseCodesAndMessages.SUCCESS, sellerList, null);
+		
+		return response;
 	}
 
 }

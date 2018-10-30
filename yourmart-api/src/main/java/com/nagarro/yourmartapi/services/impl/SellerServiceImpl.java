@@ -1,5 +1,7 @@
 package com.nagarro.yourmartapi.services.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -7,6 +9,7 @@ import com.nagarro.yourmartapi.dao.SellerDao;
 import com.nagarro.yourmartapi.dto.LoginSignupResp;
 import com.nagarro.yourmartapi.dto.RegisterSeller;
 import com.nagarro.yourmartapi.dto.Response;
+import com.nagarro.yourmartapi.dto.SellerResp;
 import com.nagarro.yourmartapi.dto.SellerStatus;
 import com.nagarro.yourmartapi.models.Seller;
 import com.nagarro.yourmartapi.services.SellerService;
@@ -27,6 +30,10 @@ public class SellerServiceImpl implements SellerService {
 
 	public Response<String> updateSellerStatus(Integer sellerId, SellerStatus sellerStatus) {
 		return this.sellerDao.updateSellerStatus(sellerId, sellerStatus);
+	}
+
+	public Response<List<SellerResp>> fetchAllSellers(List<String> sortBy, String status) {
+		return this.sellerDao.getAllSellers(sortBy, status);
 	}
 
 }
