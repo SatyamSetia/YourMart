@@ -21,19 +21,22 @@ public class SellerController {
 	@Autowired
 	private SellerService sellerService;
 	
-	@PostMapping("/seller/register")
+	@PostMapping("/sellers/register")
 	public Response<LoginSignupResp> registerSeller(@RequestBody RegisterSeller sellerBeforeRegistration) {
 		return this.sellerService.registerSeller(sellerBeforeRegistration);		
 	}
 	
-	@PostMapping("/seller/login")
+	@PostMapping("/sellers/login")
 	public Response<LoginSignupResp> authenticateSeller(@RequestBody Seller sellerBeforeLogin) {
 		return this.sellerService.authenticateSeller(sellerBeforeLogin);
 	}
 	
-	@PutMapping("/seller/{sellerId}/status")
+	@PutMapping("/sellers/{sellerId}/status")
 	public Response<String> updateSellerStatus(@PathVariable Integer sellerId, @RequestBody SellerStatus sellerStatus, @RequestHeader(value="token") String token) {
 		return this.sellerService.updateSellerStatus(sellerId,sellerStatus);
 	}
+	
+//	@GetMapping("/sellers")
+//	public void 
 
 }

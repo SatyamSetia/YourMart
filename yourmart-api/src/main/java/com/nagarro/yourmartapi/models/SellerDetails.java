@@ -1,10 +1,13 @@
 package com.nagarro.yourmartapi.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,8 +19,9 @@ public class SellerDetails {
 	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
 	
-	@Column(name = "seller_id", unique = true, nullable = false)
-	private Integer sellerId;
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="seller_id")
+	private Seller seller;
 	
 	@Column(name = "email", nullable = false)
 	private String email;
@@ -49,14 +53,14 @@ public class SellerDetails {
 		this.id = id;
 	}
 
-	public Integer getSellerId() {
-		return sellerId;
+	public Seller getSeller() {
+		return seller;
 	}
 
-	public void setSellerId(Integer sellerId) {
-		this.sellerId = sellerId;
+	public void setSeller(Seller seller) {
+		this.seller = seller;
 	}
-
+	
 	public String getEmail() {
 		return email;
 	}

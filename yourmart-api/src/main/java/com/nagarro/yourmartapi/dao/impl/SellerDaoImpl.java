@@ -50,8 +50,7 @@ public class SellerDaoImpl implements SellerDao {
 		
 		try {
 			
-			int id = (int) session.save(seller);
-			sellerDetails.setSellerId(id);
+			sellerDetails.setSeller(seller);
 			
 			session.save(sellerDetails);
 			
@@ -59,7 +58,7 @@ public class SellerDaoImpl implements SellerDao {
 			
 			String token = TokenUtils.generateToken(seller.getUsername(), seller.getSellerId());
 			
-			LoginSignupResp resp = new LoginSignupResp(id, seller.getUsername(),token);
+			LoginSignupResp resp = new LoginSignupResp(seller.getSellerId(), seller.getUsername(),token);
 			response = new Response<LoginSignupResp>(200,resp,null);
 			
 		} catch(Exception exp) {
