@@ -28,8 +28,8 @@ public class SellerServiceImpl implements SellerService {
 		return this.sellerDao.getSeller(sellerBeforeLogin);
 	}
 
-	public Response<String> updateSellerStatus(Integer sellerId, SellerStatus sellerStatus) {
-		return this.sellerDao.updateSellerStatus(sellerId, sellerStatus);
+	public Response<String> updateSellerStatus(List<SellerStatus> sellerStatusList) {
+		return this.sellerDao.updateSellerStatus(sellerStatusList);
 	}
 
 	public Response<List<SellerResp>> fetchAllSellers(List<String> sortBy, String status) {

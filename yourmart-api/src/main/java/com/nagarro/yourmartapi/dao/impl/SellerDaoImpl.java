@@ -113,17 +113,19 @@ public class SellerDaoImpl implements SellerDao {
 	}
 
 
-	public Response<String> updateSellerStatus(Integer sellerId, SellerStatus sellerStatus) {
+	public Response<String> updateSellerStatus(List<SellerStatus> sellerStatusList) {
 		
-		Seller seller = (Seller) this.session.load(Seller.class,sellerId);
-		seller.setStatus(sellerStatus.getStatus());
-		
-		this.session.beginTransaction();
-		
-		try {
-			this.session.getTransaction().commit();
-		} catch(Exception exp) {
-			System.out.println(exp);
+		for(SellerStatus sellerStatus: sellerStatusList) {
+			Seller seller = (Seller) this.session.load(Seller.class,sellerStatus.getSellerId());
+			seller.setStatus(sellerStatus.getStatus());
+			
+			this.session.beginTransaction();
+			
+			try {
+				this.session.getTransaction().commit();
+			} catch(Exception exp) {
+				System.out.println(exp);
+			}
 		}
 		
 		return null;
@@ -132,12 +134,10 @@ public class SellerDaoImpl implements SellerDao {
 	public Response<List<SellerResp>> getAllSellers(List<String> sortBy, String status) {
 		
 		String whereClause = "";
-		String sortOrder = "";
+		String sortOrder = " ORDER BY FIELD(dbSellerDetails.seller.status, 'NEED_APPROVAL','APPROVED','REJECTED')";
 		
 		if(!Objects.isNull(status)) {
-			whereClause = " WHERE dbSellerDetails.seller.status = '" + status + "'"; 
-		} else {
-			sortOrder = " ORDER BY FIELD(dbSellerDetails.seller.status, 'NEED_APPROVAL','APPROVED','REJECTED')";
+			whereClause = " WHERE dbSellerDetails.seller.status = '" + status + "'";
 		}
 		
 		if(!Objects.isNull(sortBy)) {

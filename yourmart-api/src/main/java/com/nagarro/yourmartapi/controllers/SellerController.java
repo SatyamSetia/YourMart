@@ -36,9 +36,9 @@ public class SellerController {
 		return this.sellerService.authenticateSeller(sellerBeforeLogin);
 	}
 	
-	@PutMapping("/sellers/{sellerId}/status")
-	public Response<String> updateSellerStatus(@PathVariable Integer sellerId, @RequestBody SellerStatus sellerStatus, @RequestHeader(value="token") String token) {
-		return this.sellerService.updateSellerStatus(sellerId,sellerStatus);
+	@PutMapping("/sellers")
+	public Response<String> updateSellerStatus(@RequestBody List<SellerStatus> sellerStatusList, @RequestHeader(value="token") String token) {
+		return this.sellerService.updateSellerStatus(sellerStatusList);
 	}
 	
 	@GetMapping("/sellers")

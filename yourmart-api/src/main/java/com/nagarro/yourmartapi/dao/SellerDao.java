@@ -15,7 +15,7 @@ public interface SellerDao {
 
 	public Response<LoginSignupResp> getSeller(Seller sellerBeforeLogin);
 
-	public Response<String> updateSellerStatus(Integer sellerId, SellerStatus sellerStatus);
+	public Response<String> updateSellerStatus(List<SellerStatus> sellerStatusList);
 
 	public Response<List<SellerResp>> getAllSellers(List<String> sortBy, String status);
 
