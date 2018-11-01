@@ -9,6 +9,7 @@ public class HelloController {
 
 	@RequestMapping(value="/hello")
 	public String display(Model model) {
-		return "index";
+		System.out.println("display");
+		return "home";
 	}
 }
