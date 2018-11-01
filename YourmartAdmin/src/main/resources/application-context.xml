@@ -4,4 +4,6 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	<bean id="authenticationService"
 		class="com.nagarro.YourmartAdmin.service.impl.AuthenticationServiceImpl" />
+	<bean id="sellerService"
+		class="com.nagarro.YourmartAdmin.service.impl.SellerServiceImpl" />
 </beans>

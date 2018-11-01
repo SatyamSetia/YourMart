@@ -10,11 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.nagarro.YourmartAdmin.dto.LoginRespPayload;
+import com.nagarro.YourmartAdmin.constants.ResponseStatus;
 import com.nagarro.YourmartAdmin.dto.LoginResponse;
 import com.nagarro.YourmartAdmin.dto.UserLogin;
 import com.nagarro.YourmartAdmin.service.AuthenticationService;
-
 
 @Controller
 public class AuthenticationController {
@@ -28,13 +27,19 @@ public class AuthenticationController {
 	}
 	
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-	public ModelAndView loginProcess(@ModelAttribute("authenticate") UserLogin adminBeforeLogin) {
+	public ModelAndView loginProcess(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("authenticate") UserLogin adminBeforeLogin) {
 		
 		LoginResponse adminAfterLogin = authenticationService.authenticate(adminBeforeLogin);
+		ModelAndView mav;
 		
-		ModelAndView mav = new ModelAndView("login");
-		mav.addObject("user", adminAfterLogin.getPayload().getUsername());
-		
+		if(adminAfterLogin.getStatus() != ResponseStatus.SUCCESS_CODE) {
+			mav = new ModelAndView("index");
+			mav.addObject("error", adminAfterLogin.getError());
+			return mav;
+		}
+		mav = new ModelAndView();
+		mav.addObject("username", adminAfterLogin.getPayload().getUsername());
+		mav.setViewName("redirect:/home");
 		return mav;
 	}
 
