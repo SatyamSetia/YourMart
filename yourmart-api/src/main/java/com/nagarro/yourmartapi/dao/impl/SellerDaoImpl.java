@@ -113,7 +113,7 @@ public class SellerDaoImpl implements SellerDao {
 	}
 
 
-	public Response<String> updateSellerStatus(List<SellerStatus> sellerStatusList) {
+	public Response<List<SellerResp>> updateSellerStatus(List<SellerStatus> sellerStatusList) {
 		
 		for(SellerStatus sellerStatus: sellerStatusList) {
 			Seller seller = (Seller) this.session.load(Seller.class,sellerStatus.getSellerId());
@@ -128,10 +128,10 @@ public class SellerDaoImpl implements SellerDao {
 			}
 		}
 		
-		return null;
+		return getAllSellers(null, null, null, null);
 	}
 
-	public Response<List<SellerResp>> getAllSellers(List<String> sortBy, String status) {
+	public Response<List<SellerResp>> getAllSellers(List<String> sortBy, String status, String searchKeyword, String searchType) {
 		
 		String whereClause = "";
 		String sortOrder = " ORDER BY FIELD(dbSellerDetails.seller.status, 'NEED_APPROVAL','APPROVED','REJECTED')";
@@ -144,6 +144,12 @@ public class SellerDaoImpl implements SellerDao {
 			for(String column: sortBy) {
 				sortOrder +=", dbSellerDetails.seller."+column;
 			}
+		}
+		
+		if(!Objects.isNull(searchKeyword) && !Objects.isNull(searchType)) {
+			System.out.println("hii");
+			sortOrder = "";
+			whereClause = " WHERE dbSellerDetails."+searchType+" LIKE '"+searchKeyword+"'";
 		}
 		
 		Query query = this.session.createQuery(HqlQueries.SELECT_SELLERS_FROM_TABLE + whereClause + sortOrder);
@@ -182,7 +188,19 @@ public class SellerDaoImpl implements SellerDao {
 		Query query = this.session.createQuery(HqlQueries.SELECT_SELLER_BY_ID_FROM_TABLE);
 		query.setParameter("sellerId", sellerId);
 		
-		List<SellerDetails> sellerList = query.list();
+		List<SellerDetails> sellerList = new ArrayList<SellerDetails>();
+		
+		try {
+			sellerList = query.list();
+		} catch(Exception exp) {
+			Response<SellerResp> response = new Response<>(401,null,exp.getMessage());
+			return response;
+		}
+		
+		if(sellerList.isEmpty()) {
+			Response<SellerResp> response = new Response<>(404,null,"Seller does not exists.");
+			return response;
+		}
 		
 		SellerDetails seller = sellerList.get(0);
 		

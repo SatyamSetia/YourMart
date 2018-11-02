@@ -15,9 +15,9 @@ public interface SellerService {
 
 	public Response<LoginSignupResp> authenticateSeller(Seller sellerBeforeLogin);
 
-	public Response<String> updateSellerStatus(List<SellerStatus> sellerStatusList);
+	public Response<List<SellerResp>> updateSellerStatus(List<SellerStatus> sellerStatusList);
 
-	public Response<List<SellerResp>> fetchAllSellers(List<String> sortBy, String status);
+	public Response<List<SellerResp>> fetchAllSellers(List<String> sortBy, String status, String searchKeyword, String searchType);
 
 	public Response<SellerResp> fetchSellerById(Integer sellerId);
 

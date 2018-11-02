@@ -84,37 +84,53 @@
 			</div>
 			<div class="col-sm-8">
 				<div class="list-title font-weight-light">Sellers</div>
+				<form action="search">
 				<div class="input-group">
 					<div class="input-group-prepend">
 						<div class="dropdown mt-2">
 						  <span class="bg-success text-light p-2 rounded-left">Search by</span>
 						  <div class="dropdown-content">
-						    <input type="radio" name="search" value="company" class="mb-2"> Company</br>
-						    <input type="radio" name="search" value="ownerName" class="mb-2"> Owner Name</br>
-						    <input type="radio" name="search" value="telephone"> Telephone</br>
+						    <input type="radio" name="searchBy" value="company" class="mb-2"> Company</br>
+						    <input type="radio" name="searchBy" value="ownerName" class="mb-2"> Owner Name</br>
+						    <input type="radio" name="searchBy" value="telephone"> Telephone</br>
 						  </div>
 						</div>
 					</div>
-					<input type="text" class="form-control" placeholder="Enter keywords here">
+					<input type="text" class="form-control" placeholder="Enter keywords here" name="keyword">
 					<input type="submit" value="Find">
 				</div>
+				</form>
 				<div>
-					<c:forEach var="seller" items="${sellerList}">
-						<div class="seller-list-item my-3">
-							<div class="row">
-								<div class="col-sm-4 d-flex flex-column">
-									<span><c:out value="${seller.ownerName}" /></span>
-									<span class="text-secondary small-label">Registered 5 days ago</span>
-								</div>
-								<div class="col-sm-4 text-sm-center">
-									<span><c:out value="${seller.sellerId}" /></span>
-								</div>
-								<div class="col-sm-4">
-									<span class="float-right pr-4"><c:out value="${seller.status}" /></span>
+					<div><c:out value="${listError}" /></div>
+					<form action="approveAll">
+						<c:forEach var="seller" items="${sellerList}">
+							<a href="seller/${seller.sellerId}">
+							<div class="seller-list-item my-3">
+								<div class="row">
+									<div class="col-sm-1">
+										<c:if test="${seller.status.equals('NEED_APPROVAL')}">
+											<input type="checkbox" name="check" value="${seller.sellerId}">
+										</c:if>
+										<c:if test="${!seller.status.equals('NEED_APPROVAL')}">
+											<input type="checkbox" name="check" value="" disabled>
+										</c:if>
+									</div>
+									<div class="col-sm-4 d-flex flex-column">
+										<span><c:out value="${seller.ownerName}" /></span>
+										<span class="text-secondary small-label">Registered 5 days ago</span>
+									</div>
+									<div class="col-sm-3 text-sm-center">
+										<span>Seller Id: <c:out value="${seller.sellerId}" /></span>
+									</div>
+									<div class="col-sm-4">
+										<span class="float-right pr-4"><c:out value="${seller.status}" /></span>
+									</div>
 								</div>
 							</div>
-						</div>
-					</c:forEach>
+							</a>
+						</c:forEach>
+						<input type="submit" value="Approve Checked">
+					</form>
 				</div>
 			</div>
 		</div>	

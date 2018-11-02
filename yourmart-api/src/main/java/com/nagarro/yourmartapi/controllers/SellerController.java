@@ -37,13 +37,14 @@ public class SellerController {
 	}
 	
 	@PutMapping("/sellers")
-	public Response<String> updateSellerStatus(@RequestBody List<SellerStatus> sellerStatusList, @RequestHeader(value="token") String token) {
+	public Response<List<SellerResp>> updateSellerStatus(@RequestBody List<SellerStatus> sellerStatusList, @RequestHeader(value="token") String token) {
 		return this.sellerService.updateSellerStatus(sellerStatusList);
 	}
 	
 	@GetMapping("/sellers")
-	public Response<List<SellerResp>> fetchAllSellers(@RequestParam(value="sortBy", required=false) List<String> sortBy, @RequestParam(value="status", required=false) String status) {
-		return this.sellerService.fetchAllSellers(sortBy,status);
+	public Response<List<SellerResp>> fetchAllSellers(@RequestParam(value="sortBy", required=false) List<String> sortBy, @RequestParam(value="status", required=false) String status, @RequestParam(value="searchBy", required=false) String searchType, @RequestParam(value="keyword", required=false) String searchKeyword) {
+		System.out.println(searchKeyword+" "+searchType);
+		return this.sellerService.fetchAllSellers(sortBy,status, searchKeyword, searchType);
 	}
 	
 	@GetMapping("/sellers/{sellerId}")
