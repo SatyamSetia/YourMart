@@ -45,23 +45,24 @@ public class ProfileController {
 	}
 	
 	@RequestMapping(value = "/search")
-	public ModelAndView updateList(@RequestParam(value = "sortBy",required=false) List<String> sortBy, @RequestParam(value="status",required=false) String status,HttpServletRequest request, @RequestParam(value="searchBy", required=false) String searchType, @RequestParam(value="keyword", required=false) String searchKeyword ) {
+	public ModelAndView updateList(@RequestParam(value = "sortBy",required=false) String sortBy, @RequestParam(value="status",required=false) List<String> status,HttpServletRequest request, @RequestParam(value="searchBy", required=false) String searchType, @RequestParam(value="keyword", required=false) String searchKeyword ) {
 		
 		HashMap<String, String> queryParams = new HashMap<>();
 		
 		if(!Objects.isNull(searchKeyword) && !Objects.isNull(searchType)) {
-			queryParams.put("searchBy",searchType);
-			queryParams.put("keyword",searchKeyword);
-		}
-		
-		if(!Objects.isNull(sortBy)) {
-			for(String sortName: sortBy) {
-				queryParams.put("sortBy", sortName);
-			}
+			queryParams.put(searchType, "searchBy");
+			queryParams.put(searchKeyword, "keyword");
 		}
 		
 		if(!Objects.isNull(status)) {
-			queryParams.put("status", status);
+			for(String eachStatus: status) {
+				System.out.println(eachStatus);
+				queryParams.put(eachStatus,"status");
+			}
+		}
+		
+		if(!Objects.isNull(sortBy)) {
+			queryParams.put(sortBy,"sortBy");
 		}
 		
 		SellerListResponse sellerList = sellerService.getAllSellers(queryParams);

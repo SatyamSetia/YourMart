@@ -70,12 +70,12 @@
 				<div class="">
 					<form action="search">
 						<div class="mt-4 mb-2 form-label text-success text-sm-center">Sort By</div>
-						<input type="checkbox" name="sortBy" value="sellerId"> Seller Id<br>
-						<input type="checkbox" name="sortBy" value="createdAt"> Registration time<br>
+						<input type="radio" name="sortBy" value="sellerId"> Seller Id<br>
+						<input type="radio" name="sortBy" value="createdAt"> Registration time<br>
 						<div class="mt-4 mb-2 form-label text-success text-sm-center">Filter By</div>
-						<input type="radio" name="status" value="NEED_APPROVAL"> Need Approval<br>
-						<input type="radio" name="status" value="APPROVED"> Approved<br>
-						<input type="radio" name="status" value="REJECTED"> Rejected<br>
+						<input type="checkbox" name="status" value="NEED_APPROVAL"> Need Approval<br>
+						<input type="checkbox" name="status" value="APPROVED"> Approved<br>
+						<input type="checkbox" name="status" value="REJECTED"> Rejected<br>
 						<div class="">
 							<input type="submit" value="Apply" class="mt-4 btn btn-success w-100">
 						</div>

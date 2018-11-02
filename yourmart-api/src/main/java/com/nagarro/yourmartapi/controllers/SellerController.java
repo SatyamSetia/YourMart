@@ -42,7 +42,7 @@ public class SellerController {
 	}
 	
 	@GetMapping("/sellers")
-	public Response<List<SellerResp>> fetchAllSellers(@RequestParam(value="sortBy", required=false) List<String> sortBy, @RequestParam(value="status", required=false) String status, @RequestParam(value="searchBy", required=false) String searchType, @RequestParam(value="keyword", required=false) String searchKeyword) {
+	public Response<List<SellerResp>> fetchAllSellers(@RequestParam(value="sortBy", required=false) String sortBy, @RequestParam(value="status", required=false) List<String> status, @RequestParam(value="searchBy", required=false) String searchType, @RequestParam(value="keyword", required=false) String searchKeyword) {
 		System.out.println(searchKeyword+" "+searchType);
 		return this.sellerService.fetchAllSellers(sortBy,status, searchKeyword, searchType);
 	}

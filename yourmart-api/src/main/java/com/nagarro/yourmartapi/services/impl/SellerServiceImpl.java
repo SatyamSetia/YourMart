@@ -32,7 +32,7 @@ public class SellerServiceImpl implements SellerService {
 		return this.sellerDao.updateSellerStatus(sellerStatusList);
 	}
 
-	public Response<List<SellerResp>> fetchAllSellers(List<String> sortBy, String status, String searchKeyword, String searchType) {
+	public Response<List<SellerResp>> fetchAllSellers(String sortBy, List<String> status, String searchKeyword, String searchType) {
 		return this.sellerDao.getAllSellers(sortBy, status, searchKeyword, searchType);
 	}
 

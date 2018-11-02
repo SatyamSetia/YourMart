@@ -13,5 +13,7 @@ public class Models {
 	public static final String SELLER_MODEL = BASE_PACKAGE +  ".Seller";
 	
 	public static final String SELLER_DETAILS_MODEL = BASE_PACKAGE + ".SellerDetails";
+	
+	public static final String PRODUCT_MODEL = BASE_PACKAGE + ".Product";
 
 }

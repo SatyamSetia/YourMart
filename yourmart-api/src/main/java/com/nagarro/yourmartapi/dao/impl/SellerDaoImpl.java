@@ -131,30 +131,40 @@ public class SellerDaoImpl implements SellerDao {
 		return getAllSellers(null, null, null, null);
 	}
 
-	public Response<List<SellerResp>> getAllSellers(List<String> sortBy, String status, String searchKeyword, String searchType) {
+	public Response<List<SellerResp>> getAllSellers(String sortBy, List<String> status, String searchKeyword, String searchType) {
 		
 		String whereClause = "";
 		String sortOrder = " ORDER BY FIELD(dbSellerDetails.seller.status, 'NEED_APPROVAL','APPROVED','REJECTED')";
 		
-		if(!Objects.isNull(status)) {
-			whereClause = " WHERE dbSellerDetails.seller.status = '" + status + "'";
+		if(!Objects.isNull(sortBy)) {
+			sortOrder = " ORDER BY dbSellerDetails.seller."+sortBy;
 		}
 		
-		if(!Objects.isNull(sortBy)) {
-			for(String column: sortBy) {
-				sortOrder +=", dbSellerDetails.seller."+column;
+		if(!Objects.isNull(status)) {
+			whereClause = " WHERE dbSellerDetails.seller.status IN (";
+			
+			int count=0;
+			for(String eachStatus: status) {
+				System.out.println(eachStatus);
+				if(count!=0) {
+					whereClause += ", ";
+				}
+				whereClause += "'"+eachStatus+"'";
+				count++;
 			}
+			
+			whereClause += ")";
 		}
+		
+		System.out.println(whereClause);
 		
 		if(!Objects.isNull(searchKeyword) && !Objects.isNull(searchType)) {
 			System.out.println("hii");
 			sortOrder = "";
-			whereClause = " WHERE dbSellerDetails."+searchType+" LIKE '"+searchKeyword+"'";
+			whereClause = " WHERE dbSellerDetails."+searchType+" LIKE '%"+searchKeyword+"%'";
 		}
 		
 		Query query = this.session.createQuery(HqlQueries.SELECT_SELLERS_FROM_TABLE + whereClause + sortOrder);
-		
-		System.out.println(query.getQueryString());
 		
 		List<SellerDetails> list = query.list();
 		

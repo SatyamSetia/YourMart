@@ -17,7 +17,7 @@ public interface SellerService {
 
 	public Response<List<SellerResp>> updateSellerStatus(List<SellerStatus> sellerStatusList);
 
-	public Response<List<SellerResp>> fetchAllSellers(List<String> sortBy, String status, String searchKeyword, String searchType);
+	public Response<List<SellerResp>> fetchAllSellers(String sortBy, List<String> status, String searchKeyword, String searchType);
 
 	public Response<SellerResp> fetchSellerById(Integer sellerId);
 

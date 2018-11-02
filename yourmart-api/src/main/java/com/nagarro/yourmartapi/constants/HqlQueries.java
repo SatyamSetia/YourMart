@@ -14,4 +14,6 @@ public class HqlQueries {
 	
 	public static final String SELECT_SELLER_BY_ID_FROM_TABLE = "FROM " + Models.SELLER_DETAILS_MODEL + " as dbSellerDetails WHERE dbSellerDetails.seller.sellerId = :sellerId";
 
+	public static final String SELECT_PRODUCTS_FROM_TABLE = "FROM " + Models.PRODUCT_MODEL + " as dbProduct";;
+
 }

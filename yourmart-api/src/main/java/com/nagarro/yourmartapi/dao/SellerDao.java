@@ -17,7 +17,7 @@ public interface SellerDao {
 
 	public Response<List<SellerResp>> updateSellerStatus(List<SellerStatus> sellerStatusList);
 
-	public Response<List<SellerResp>> getAllSellers(List<String> sortBy, String status, String searchKeyword, String searchType);
+	public Response<List<SellerResp>> getAllSellers(String sortBy, List<String> status, String searchKeyword, String searchType);
 
 	public Response<SellerResp> getSellerById(Integer SellerId);
 
