@@ -11,5 +11,6 @@
         <mapping class="com.nagarro.yourmartapi.models.Admin"></mapping>
         <mapping class="com.nagarro.yourmartapi.models.Seller"></mapping>
         <mapping class="com.nagarro.yourmartapi.models.SellerDetails"></mapping>
+        <mapping class="com.nagarro.yourmartapi.models.Product"></mapping>
     </session-factory>
 </hibernate-configuration>
