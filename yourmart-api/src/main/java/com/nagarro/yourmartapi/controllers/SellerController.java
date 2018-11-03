@@ -53,5 +53,10 @@ public class SellerController {
 	public Response<SellerResp> fetchSellerById(@PathVariable Integer sellerId) {
 		return this.sellerService.fetchSellerById(sellerId);
 	}
+	
+	@GetMapping("/sellers/user")
+	public Response<SellerResp> fetchCurrentUser(@RequestHeader(value="token") String token) {
+		return this.sellerService.fetchCurrentUser(token);
+	}
 
 }

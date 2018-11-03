@@ -21,4 +21,6 @@ public interface SellerDao {
 
 	public Response<SellerResp> getSellerById(Integer SellerId);
 
+	public Response<SellerResp> getCurrentUser(String token);
+
 }

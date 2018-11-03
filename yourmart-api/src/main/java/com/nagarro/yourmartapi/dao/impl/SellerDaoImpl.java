@@ -229,4 +229,16 @@ public class SellerDaoImpl implements SellerDao {
 		return response;
 	}
 
+
+	public Response<SellerResp> getCurrentUser(String token) {
+		
+		Integer sellerId = TokenUtils.getIdFromToken(token);
+		
+		if(sellerId==null) {
+			Response<SellerResp> response = new Response<>(ResponseCodesAndMessages.UNAUTHORIZED, null, "Not Logged in!!");
+			return response;
+		}
+		return getSellerById(sellerId);
+	}
+
 }

@@ -21,4 +21,6 @@ public interface SellerService {
 
 	public Response<SellerResp> fetchSellerById(Integer sellerId);
 
+	public Response<SellerResp> fetchCurrentUser(String token);
+
 }

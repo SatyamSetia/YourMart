@@ -40,4 +40,8 @@ public class SellerServiceImpl implements SellerService {
 		return this.sellerDao.getSellerById(sellerId);
 	}
 
+	public Response<SellerResp> fetchCurrentUser(String token) {
+		return this.sellerDao.getCurrentUser(token);
+	}
+
 }
