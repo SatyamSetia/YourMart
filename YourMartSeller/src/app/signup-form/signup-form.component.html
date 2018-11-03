@@ -1,0 +1,22 @@
+<div>
+  <div>
+    <a routerLink="/">
+      Already have an account?
+    </a>
+  </div>
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <input type="text" formControlName="username" placeholder="Username" required autocomplete="off">
+    <input type="password" formControlName="password" placeholder="Password" required autocomplete="off">
+    <input type="password" formControlName="confirmPassword" placeholder="Confirm Password" required autocomplete="off">
+    <input type="text" formControlName="company" placeholder="Company Name" required autocomplete="off">
+    <input type="text" formControlName="ownerName" placeholder="Owner Name" required autocomplete="off">
+    <input type="text" formControlName="address" placeholder="Address" required autocomplete="off">
+    <input type="text" formControlName="email" placeholder="Email" required autocomplete="off">
+    <input type="text" formControlName="gstNumber" placeholder="GST Number" required autocomplete="off">
+    <input type="text" formControlName="telephone" placeholder="Telephone" required autocomplete="off">
+    <input type="submit" value="Register" [disabled]="!signupForm.valid">
+  </form>
+  <div *ngIf="error!=null">
+    {{error}}
+  </div>
+</div>

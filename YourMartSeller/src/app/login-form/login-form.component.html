@@ -1,0 +1,15 @@
+<div class="">
+  <div>
+    <a routerLink="/register">
+      Need an account?
+    </a>
+  </div>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <input type="text" formControlName="username" placeholder="Username" required autocomplete="off">
+    <input type="password" formControlName="password" placeholder="Password" required autocomplete="off">
+    <input type="submit" value="Login" [disabled]="!loginForm.valid">
+  </form>
+  <div *ngIf="error!=null">
+    {{error}}
+  </div>
+</div>
