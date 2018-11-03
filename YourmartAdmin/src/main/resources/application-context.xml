@@ -6,4 +6,6 @@
 		class="com.nagarro.YourmartAdmin.service.impl.AuthenticationServiceImpl" />
 	<bean id="sellerService"
 		class="com.nagarro.YourmartAdmin.service.impl.SellerServiceImpl" />
+	<bean id="productService"
+		class="com.nagarro.YourmartAdmin.service.impl.ProductServiceImpl" />
 </beans>

@@ -12,6 +12,8 @@ public class ResponseCodesAndMessages {
 	
 	public static final int FORBIDDEN = 403;
 	
+	public static final int NOT_FOUND = 404;
+	
 	public static final String UNAUTHORIZED_MESSAGE = "Invalid username or password";
 	
 	public static final String NEED_APPROVAL_MESSAGE = "Your profile has not been approved yet.";

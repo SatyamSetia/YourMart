@@ -156,8 +156,6 @@ public class SellerDaoImpl implements SellerDao {
 			whereClause += ")";
 		}
 		
-		System.out.println(whereClause);
-		
 		if(!Objects.isNull(searchKeyword) && !Objects.isNull(searchType)) {
 			System.out.println("hii");
 			sortOrder = "";
@@ -203,12 +201,12 @@ public class SellerDaoImpl implements SellerDao {
 		try {
 			sellerList = query.list();
 		} catch(Exception exp) {
-			Response<SellerResp> response = new Response<>(401,null,exp.getMessage());
+			Response<SellerResp> response = new Response<>(ResponseCodesAndMessages.UNAUTHORIZED,null,exp.getMessage());
 			return response;
 		}
 		
 		if(sellerList.isEmpty()) {
-			Response<SellerResp> response = new Response<>(404,null,"Seller does not exists.");
+			Response<SellerResp> response = new Response<>(ResponseCodesAndMessages.NOT_FOUND,null,"Seller does not exists.");
 			return response;
 		}
 		

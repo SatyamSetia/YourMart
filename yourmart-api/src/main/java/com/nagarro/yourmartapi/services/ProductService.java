@@ -10,7 +10,9 @@ public interface ProductService {
 
 	void addProduct(ProductDetails productDetails);
 
-	Response<List<ProductResp>> fetchAllProducts(List<String> sortBy, String status, String searchKeyword,
+	Response<List<ProductResp>> fetchAllProducts(String sortBy, List<String> status, String searchKeyword,
 			String searchType);
+
+	Response<ProductResp> fetchSingleProduct(Integer productId);
 
 }

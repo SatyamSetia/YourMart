@@ -11,5 +11,7 @@ public class Url {
 	public static final String ADMIN_AUTHENTICATION_ROUTE = "admin/login";
 	
 	public static final String GET_ALL_SELLERS = "sellers";
+	
+	public static final String GET_ALL_PRODUCTS = "products";
 
 }

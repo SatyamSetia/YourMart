@@ -10,7 +10,9 @@ public interface ProductDao {
 
 	void createNewProduct(ProductDetails productDetails);
 
-	Response<List<ProductResp>> getAllProducts(List<String> sortBy, String status, String searchKeyword,
+	Response<List<ProductResp>> getAllProducts(String sortBy, List<String> status, String searchKeyword,
 			String searchType);
+
+	Response<ProductResp> getProductById(Integer productId);
 
 }

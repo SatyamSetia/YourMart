@@ -21,8 +21,12 @@ public class ProductServiceImpl implements ProductService {
 		this.productDao.createNewProduct(productDetails);		
 	}
 
-	public Response<List<ProductResp>> fetchAllProducts(List<String> sortBy, String status, String searchKeyword,
+	public Response<List<ProductResp>> fetchAllProducts(String sortBy, List<String> status, String searchKeyword,
 			String searchType) {
 		return this.productDao.getAllProducts(sortBy, status, searchKeyword, searchType);
+	}
+
+	public Response<ProductResp> fetchSingleProduct(Integer productId) {
+		return this.productDao.getProductById(productId);
 	}
 }

@@ -59,20 +59,30 @@ private Session session;
 			
 	}
 
-	public Response<List<ProductResp>> getAllProducts(List<String> sortBy, String status, String searchKeyword,
+	public Response<List<ProductResp>> getAllProducts(String sortBy, List<String> status, String searchKeyword,
 			String searchType) {
 		
 		String whereClause = "";
 		String sortOrder = "";
 		
 		if(!Objects.isNull(status)) {
-			whereClause = " WHERE dbProduct.status = '" + status + "'";
+			whereClause = " WHERE dbProduct.status IN (";
+			
+			int count=0;
+			for(String eachStatus: status) {
+				System.out.println(eachStatus);
+				if(count!=0) {
+					whereClause += ", ";
+				}
+				whereClause += "'"+eachStatus+"'";
+				count++;
+			}
+			
+			whereClause += ")";
 		}
 		
 		if(!Objects.isNull(sortBy)) {
-			for(String column: sortBy) {
-				sortOrder +=", dbProduct."+column;
-			}
+			sortOrder = " ORDER BY dbProduct."+sortBy;
 		}
 		
 		if(!Objects.isNull(searchKeyword) && !Objects.isNull(searchType)) {
@@ -112,6 +122,50 @@ private Session session;
 		}
 		
 		response = new Response<List<ProductResp>>(ResponseCodesAndMessages.SUCCESS, productList, null);
+		
+		return response;
+	}
+
+	public Response<ProductResp> getProductById(Integer productId) {
+		
+		Query query = this.session.createQuery(HqlQueries.SELECT_PRODUCT_BY_ID_FROM_TABLE);
+		query.setParameter("productId", productId);
+		
+		List<Product> productList = new ArrayList<Product>();
+		
+		try {
+			productList = query.list();
+		} catch(Exception exp) {
+			Response<ProductResp> response = new Response<>(ResponseCodesAndMessages.UNAUTHORIZED,null,exp.getMessage());
+			return response;
+		}
+		
+		if(productList.isEmpty()) {
+			Response<ProductResp> response = new Response<>(ResponseCodesAndMessages.NOT_FOUND,null,"Product does not exists.");
+			return response;
+		}
+		
+		Product product = productList.get(0);
+		
+		ProductResp productResponse = new ProductResp();
+		
+		productResponse.setComments(product.getComments());
+		productResponse.setDimensions(product.getDimensions());
+		productResponse.setLongDesc(product.getLongDesc());
+		productResponse.setMrp(product.getMrp());
+		productResponse.setName(product.getName());
+		productResponse.setPrimaryImage(product.getPrimaryImage());
+		productResponse.setProdAttr(product.getProdAttr());
+		productResponse.setProductId(product.getProductId());
+		productResponse.setSellerId(product.getSeller().getSellerId());
+		productResponse.setSellerProdCode(product.getSellerProdCode());
+		productResponse.setShortDesc(product.getShortDesc());
+		productResponse.setSsp(product.getSsp());
+		productResponse.setStatus(product.getStatus());
+		productResponse.setUsageInstructions(product.getUsageInstructions());
+		productResponse.setYmp(product.getYmp());
+		
+		Response<ProductResp> response = new Response<ProductResp>(200,productResponse,null);
 		
 		return response;
 	}
