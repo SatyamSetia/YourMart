@@ -15,4 +15,6 @@ public interface ProductDao {
 
 	Response<ProductResp> getProductById(Integer productId);
 
+	Response<List<ProductResp>> getAllProductsOfSeller(Integer sellerId, String sortBy, List<String> status);
+
 }

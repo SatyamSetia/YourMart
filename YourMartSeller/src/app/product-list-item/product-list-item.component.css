@@ -1,0 +1,10 @@
+.small-label {
+  font-size: 0.75rem;
+}
+
+.product-list-item {
+  border: 1px solid #EAECEE;
+  box-shadow: 1px 1px #EAECEE;
+  border-radius: 10px;
+  padding: 15px;
+}

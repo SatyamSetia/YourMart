@@ -29,4 +29,8 @@ public class ProductServiceImpl implements ProductService {
 	public Response<ProductResp> fetchSingleProduct(Integer productId) {
 		return this.productDao.getProductById(productId);
 	}
+
+	public Response<List<ProductResp>> fetchProductsOfSeller(Integer sellerId, String sortBy, List<String> status) {
+		return this.productDao.getAllProductsOfSeller(sellerId, sortBy, status);
+	}
 }

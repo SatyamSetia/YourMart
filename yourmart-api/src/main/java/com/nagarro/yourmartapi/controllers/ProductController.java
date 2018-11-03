@@ -37,4 +37,9 @@ public class ProductController {
 	public Response<ProductResp> fetchSinglePrduct(@PathVariable(value="productId") Integer productId) {
 		return this.productService.fetchSingleProduct(productId);
 	}
+	
+	@GetMapping("/products/seller/{sellerId}")
+	public Response<List<ProductResp>> fetchProductsOfSeller(@PathVariable(value="sellerId") Integer sellerId, @RequestParam(value="sortBy", required=false) String sortBy, @RequestParam(value="status", required=false) List<String> status) {
+		return this.productService.fetchProductsOfSeller(sellerId,sortBy,status);
+	}
 }

@@ -15,4 +15,6 @@ public interface ProductService {
 
 	Response<ProductResp> fetchSingleProduct(Integer productId);
 
+	Response<List<ProductResp>> fetchProductsOfSeller(Integer sellerId, String sortBy, List<String> status);
+
 }

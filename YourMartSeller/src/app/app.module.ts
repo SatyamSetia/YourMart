@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { SignupFormComponent } from './signup-form/signup-form.component';
 import { HomeComponent } from './home/home.component';
+import { ProductListComponent } from './product-list/product-list.component';
+import { ProductListItemComponent } from './product-list-item/product-list-item.component';
 
 const routes: Routes = [
   {
@@ -28,6 +30,8 @@ const routes: Routes = [
     LoginFormComponent,
     SignupFormComponent,
     HomeComponent,
+    ProductListComponent,
+    ProductListItemComponent,
   ],
   imports: [
     BrowserModule,

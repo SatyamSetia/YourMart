@@ -61,8 +61,8 @@
 			</form>
 			<span class="font-weight-light welcome">Welcome <c:out value="${user}" /></span>
 		</div>
-		</div>
-		<div class="container py-4">
+	</div>
+	<div class="container py-4">
 		<div class="row">
 			<div class="col-sm-3 px-5 filters">
 				<div class="">

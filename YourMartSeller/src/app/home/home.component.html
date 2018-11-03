@@ -1,3 +1,38 @@
-<p>
-  home works!
-</p>
+<div *ngIf="isLoading; else isLoaded">
+
+</div>
+<ng-template #isLoaded>
+  <div class="bg-success d-flex justify-content-between p-3 text-light">
+		<span class="font-weight-light title">YourMart</span>
+		<span class="font-weight-light welcome">Welcome {{user.username}}</span>
+  </div>
+  <div class="container py-4">
+    <div class="row">
+      <div class="col-sm-3 px-5 filters">
+        <div class="">
+					<form [formGroup]="sortAndFilter" (ngSubmit)="onSortAndFilter()">
+            <div class="mt-4 mb-2 form-label text-success text-sm-center">Sort By</div>
+            <input type="radio" formControlName="sortBy" value="sellerProdCode"> Product Code<br>
+						<input type="radio" formControlName="sortBy" value="name"> Product Name<br>
+            <input type="radio" formControlName="sortBy" value="mrp"> MRP<br>
+						<input type="radio" formControlName="sortBy" value="ssp"> SSP<br>
+						<input type="radio" formControlName="sortBy" value="ymp"> YMP<br>
+						<input type="radio" formControlName="sortBy" value="createdAt"> Registration Time<br>
+						<div class="mt-4 mb-2 form-label text-success text-sm-center">Filter By</div>
+						<input type="checkbox" formControlName="review" value="REVIEW"> REVIEW<br>
+						<input type="checkbox" formControlName="needApproval" value="NEED_APPROVAL"> Need Approval<br>
+						<input type="checkbox" formControlName="approved" value="APPROVED"> Approved<br>
+						<input type="checkbox" formControlName="rejected" value="REJECTED"> Rejected<br>
+						<div class="">
+							<input type="submit" value="Apply" class="mt-4 btn btn-success w-100">
+						</div>
+          </form>
+				</div>
+      </div>
+      <div class="col-sm-8">
+        <div class="list-title font-weight-light">Products</div>
+        <app-product-list [products]="products"></app-product-list>
+      </div>
+    </div>
+  </div>
+</ng-template>

@@ -24,7 +24,7 @@ import com.nagarro.yourmartapi.utils.HibernateUtils;
 @Component
 public class ProductDaoImpl implements ProductDao {
 	
-private Session session;
+	private Session session;
 	
 	public ProductDaoImpl() {
 		this.session = HibernateUtils.createSession();
@@ -166,6 +166,80 @@ private Session session;
 		productResponse.setYmp(product.getYmp());
 		
 		Response<ProductResp> response = new Response<ProductResp>(200,productResponse,null);
+		
+		return response;
+	}
+
+	public Response<List<ProductResp>> getAllProductsOfSeller(Integer sellerId, String sortBy, List<String> status) {
+		
+		String whereClause = "";
+		String sortOrder = "";
+		
+		if(!Objects.isNull(status)) {
+			whereClause = " AND dbProduct.status IN (";
+			
+			int count=0;
+			for(String eachStatus: status) {
+				System.out.println(eachStatus);
+				if(count!=0) {
+					whereClause += ", ";
+				}
+				whereClause += "'"+eachStatus+"'";
+				count++;
+			}
+			
+			whereClause += ")";
+		}
+		
+		if(!Objects.isNull(sortBy)) {
+			sortOrder = " ORDER BY dbProduct."+sortBy;
+		}
+		
+		Query query = this.session.createQuery(HqlQueries.SELECT_PRODUCT_BY_SELLER_ID_FROM_TABLE + whereClause + sortOrder);
+		query.setParameter("sellerId", sellerId);
+		
+		List<Product> productList = new ArrayList<Product>();
+		
+		try {
+			productList = query.list();
+		} catch(Exception exp) {
+			Response<List<ProductResp>> response = new Response<>(ResponseCodesAndMessages.UNAUTHORIZED,null,exp.getMessage());
+			return response;
+		}
+		
+		if(productList.isEmpty()) {
+			Response<List<ProductResp>> response = new Response<>(ResponseCodesAndMessages.NOT_FOUND,null,"Product list empty");
+			return response;
+		}
+		
+		List<ProductResp> list = new ArrayList<ProductResp>();
+		
+		Response<List<ProductResp>> response;
+		
+		for(Product product: productList) {
+			
+			ProductResp prod = new ProductResp();
+			
+			prod.setName(product.getName());
+			prod.setComments(product.getComments());
+			prod.setDimensions(product.getDimensions());
+			prod.setMrp(product.getMrp());
+			prod.setProdAttr(product.getProdAttr());
+			prod.setPrimaryImage(product.getPrimaryImage());
+			prod.setLongDesc(product.getLongDesc());
+			prod.setProductId(product.getProductId());
+			prod.setSellerProdCode(product.getSellerProdCode());
+			prod.setStatus(product.getStatus());
+			prod.setShortDesc(product.getShortDesc());
+			prod.setUsageInstructions(product.getUsageInstructions());
+			prod.setYmp(product.getYmp());
+			prod.setSsp(product.getSsp());
+			prod.setSellerId(product.getSeller().getSellerId());
+			
+			list.add(prod);
+		}
+		
+		response = new Response<List<ProductResp>>(ResponseCodesAndMessages.SUCCESS, list, null);
 		
 		return response;
 	}
