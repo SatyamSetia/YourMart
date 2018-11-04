@@ -32,7 +32,7 @@ body {
 		<div class="col-sm-6 h-100">
     	</div>
     	<div class="col-sm-6 form">
-    		<h4 class="font-weight-light text-secondary">YourMart</h4>
+    		<h4 class="font-weight-light text-secondary">YourMart Admin Login</h4>
 	      <form action="authenticate" method="post" class="d-flex flex-column w-50 login" id="loginForm">
 	        <div class="d-flex justify-content-center text-danger">
 	          <c:out value="${error}" />

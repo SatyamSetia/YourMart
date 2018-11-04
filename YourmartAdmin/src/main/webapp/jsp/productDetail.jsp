@@ -65,8 +65,17 @@
 	</div>
 	<div class="container">
 		<div class="row my-5 box shadow rounded py-3">
-			<div class="col-sm-6 d-flex justify-content-center">
+			<div class="col-sm-6 d-flex justify-content-center flex-column">
 				<img src="${product.primaryImage}" class="p-image rounded">
+				<h5 class="font-weight-light mt-4">Gallery</h5>
+		          <div class="d-flex my-4 mb-4 flex-wrap">
+			          <c:if test="${product.gallery.size()==0 }">
+			          	<span class="font-weight-light">No images found in gallery</span>
+			          </c:if>
+			          <c:forEach var="image" items="${product.gallery}">
+			          	<img src="${image}" height=70 width=70 class="rounded mx-2">
+			          </c:forEach>
+		          </div>
 			</div>
 			<div class="col-sm-6">
 				<div class="d-flex justify-content-between">
@@ -131,7 +140,7 @@
 					<input type="hidden" name="status" value="APPROVED">
 					<input type="hidden" name="productId" value="${product.productId }">
 					<input type="hidden" name="comment" id="commentid" value="">
-					<input class="btn m-3 btn-danger" type="submit" value="Approve ${product.name }" onclick="openPrompt()">
+					<input class="btn m-3 btn-success" type="submit" value="Approve ${product.name }" onclick="openPrompt()">
 				</form>
 				<form action="/YourmartAdmin/updateStatus"  method="post">
 					<input type="hidden" name="status" value="REJECTED">
@@ -153,7 +162,7 @@
 					<input type="hidden" name="status" value="APPROVED">
 					<input type="hidden" name="productId" value="${product.productId }">
 					<input type="hidden" name="comment" id="commentid" value="">
-					<input class="btn m-3 btn-danger" type="submit" value="Approve ${product.name }" onclick="openPrompt()">
+					<input class="btn m-3 btn-success" type="submit" value="Approve ${product.name }" onclick="openPrompt()">
 				</form>
 			</c:if>
 		</div>

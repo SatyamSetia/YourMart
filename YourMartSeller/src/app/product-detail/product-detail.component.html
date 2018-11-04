@@ -5,8 +5,17 @@
   <app-header></app-header>
   <div class="container">
       <div class="row my-5 box shadow rounded py-3">
-        <div class="col-sm-6 d-flex justify-content-center">
+        <div class="col-sm-6 d-flex justify-content-center flex-column">
           <img src="{{product.primaryImage}}" class="p-image rounded">
+          <h5 class="font-weight-light mt-4">Gallery</h5>
+          <div class="d-flex my-4 mb-4 flex-wrap">
+            <div *ngIf="product.gallery.length==0">
+              <span class="font-weight-light">No images found in gallery</span>
+            </div>
+            <div *ngFor="let image of product.gallery">
+              <img src="{{image}}" height=70 width=70 class="rounded mx-2">
+            </div>
+          </div>
         </div>
         <div class="col-sm-6">
           <div class="d-flex justify-content-between">

@@ -1,6 +1,7 @@
 package com.nagarro.YourmartAdmin.dto;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class ProductRespPayload {
 	
@@ -32,6 +33,8 @@ public class ProductRespPayload {
 	
 	private String status;
 	
+	private List<String> gallery;
+
 	private String usageInstructions;
 	
 	private LocalDateTime createdAt;
@@ -46,6 +49,14 @@ public class ProductRespPayload {
 		this.productId = productId;
 	}
 
+	public List<String> getGallery() {
+		return gallery;
+	}
+
+	public void setGallery(List<String> gallery) {
+		this.gallery = gallery;
+	}
+	
 	public String getName() {
 		return name;
 	}
