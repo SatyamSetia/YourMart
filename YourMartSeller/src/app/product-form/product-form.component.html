@@ -1,3 +1,24 @@
-<p>
-  product-form works!
-</p>
+<div class="container">
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-sm-6">
+        <input type="text" formControlName="name" placeholder="Product Name" class="form-control my-3 w-75" required>
+        <input type="text" formControlName="sellerProdCode" placeholder="Product Code" class="form-control my-3 w-75" required>
+        <input type="text" formControlName="shortDesc" placeholder="Short Description" class="form-control my-3 w-75" required>
+        <textarea type="textarea" rows="5" formControlName="longDesc" placeholder="Long Description" class="form-control my-3 w-75"></textarea>
+        <input type="text" formControlName="dimensions" placeholder="Dimensions" class="form-control my-3 w-75">
+        <input type="text" formControlName="categories" placeholder="Categories" class="form-control my-3 w-75">
+      </div>
+      <div class="col-sm-6">
+        <input type="text" formControlName="mrp" placeholder="MRP" class="form-control my-3 w-75" required>
+        <input type="text" formControlName="ssp" placeholder="SSP" class="form-control my-3 w-75">
+        <input type="text" formControlName="ymp" placeholder="YMP" class="form-control my-3 w-75" required>
+        <input type="text" formControlName="primaryImage" placeholder="Primary Image URL" class="form-control my-3 w-75" required>
+        <input type="text" (keydown.enter)="$event.preventDefault()" #imageInput (keydown.enter)="addImage(imageInput.value)" formControlName="gallery" placeholder="Enter gallery image url and press enter" class="form-control my-3 w-75">
+      </div>
+    </div>
+    <div class="d-flex justify-content-center my-5">
+      <input type="submit" value="Add Product" class=" btn btn-success" [disabled]="!productForm.valid">
+    </div>
+  </form>
+</div>

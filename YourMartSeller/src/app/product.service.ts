@@ -8,6 +8,10 @@ export class ProductService {
 
   BASE_URL = 'http://localhost:8080';
 
+  httpOptions = {
+    'Content-Type': 'application/json'
+  }
+
   constructor(private http: HttpClient) { }
 
   getAllProductsOfSeller(sellerId, queryString) {
@@ -16,5 +20,9 @@ export class ProductService {
 
   getProduct(productId) {
     return this.http.get(`${this.BASE_URL}/products/${productId}`);
+  }
+
+  addProduct(product) {
+    return this.http.post(`${this.BASE_URL}/products`,product,this.httpOptions);
   }
 }
