@@ -1,15 +1,19 @@
-<div class="">
-  <div>
-    <a routerLink="/register">
-      Need an account?
-    </a>
-  </div>
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <input type="text" formControlName="username" placeholder="Username" required autocomplete="off">
-    <input type="password" formControlName="password" placeholder="Password" required autocomplete="off">
-    <input type="submit" value="Login" [disabled]="!loginForm.valid">
-  </form>
-  <div *ngIf="error!=null">
-    {{error}}
+<div class="h-100">
+  <div class="row h-100">
+    <div class="col-sm-6 h-100">
+    </div>
+    <div class="col-sm-6 form">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="d-flex flex-column w-50">
+        <div *ngIf="error!=null" class="d-flex justify-content-center text-danger">
+          {{error}}
+        </div>
+        <input type="text" formControlName="username" placeholder="Username" required autocomplete="off" class="my-2 form-control">
+        <input type="password" formControlName="password" placeholder="Password" required autocomplete="off" class="my-2 form-control">
+        <input type="submit" value="Login" [disabled]="!loginForm.valid" class="my-2 btn btn-success">
+        <a routerLink="/register">
+          Need an account?
+        </a>
+      </form>
+    </div>
   </div>
 </div>

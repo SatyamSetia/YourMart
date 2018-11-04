@@ -14,6 +14,7 @@ import com.nagarro.yourmartapi.constants.Status;
 import com.nagarro.yourmartapi.dao.ProductDao;
 import com.nagarro.yourmartapi.dto.ProductDetails;
 import com.nagarro.yourmartapi.dto.ProductResp;
+import com.nagarro.yourmartapi.dto.ProductStatus;
 import com.nagarro.yourmartapi.dto.Response;
 import com.nagarro.yourmartapi.dto.SellerResp;
 import com.nagarro.yourmartapi.models.Gallery;
@@ -95,9 +96,8 @@ public class ProductDaoImpl implements ProductDao {
 		}
 		
 		if(!Objects.isNull(searchKeyword) && !Objects.isNull(searchType)) {
-			System.out.println("hii");
 			sortOrder = "";
-			whereClause = " WHERE dbSellerDetails."+searchType+" LIKE '"+searchKeyword+"'";
+			whereClause = " WHERE dbProduct."+searchType+" LIKE '"+searchKeyword+"'";
 		}
 		
 		Query query = this.session.createQuery(HqlQueries.SELECT_PRODUCTS_FROM_TABLE + whereClause + sortOrder);
@@ -264,6 +264,49 @@ public class ProductDaoImpl implements ProductDao {
 		List<String> images = query.list();
 		
 		return images;
+	}
+
+	public void updateProduct(Integer productId, ProductDetails productDetails) {
+		
+		this.session.beginTransaction();
+		
+		Product product = (Product) this.session.load(Product.class, productId);
+		
+		product.setComments("");
+		product.setDimensions(productDetails.getDimensions());
+		product.setLongDesc(productDetails.getLongDesc());
+		product.setMrp(productDetails.getMrp());
+		product.setName(productDetails.getName());
+		product.setPrimaryImage(product.getPrimaryImage());
+		product.setProdAttr(productDetails.getProdAttr());
+		product.setSellerProdCode(productDetails.getSellerProdCode());
+		product.setSsp(productDetails.getSsp());
+		product.setYmp(productDetails.getYmp());
+		product.setShortDesc(productDetails.getShortDesc());
+		product.setStatus("REVIEW");
+		
+		this.session.getTransaction().commit();
+		
+	}
+
+	public Response<Product> updateProductStatus(Integer productId, ProductStatus productStatus) {
+		
+		if(productStatus.getStatus().equals("REJECTED") && productStatus.getComment().equals("")) {
+			return new Response<Product>(401, null,"Comment can not be empty");
+		}
+		this.session.beginTransaction();
+		
+		Product product = (Product) this.session.load(Product.class, productId);
+		
+		product.setComments(productStatus.getComment());
+		product.setStatus(productStatus.getStatus());
+		try {
+			this.session.getTransaction().commit();
+		} catch(Exception exp) {
+			return new Response<Product>(500, null, exp.getMessage());
+		}
+		Response<Product> response = new Response<>(200, product, null);
+		return response;
 	}
 
 }

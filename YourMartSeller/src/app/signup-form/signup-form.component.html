@@ -1,22 +1,28 @@
-<div>
-  <div>
-    <a routerLink="/">
-      Already have an account?
-    </a>
-  </div>
-  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-    <input type="text" formControlName="username" placeholder="Username" required autocomplete="off">
-    <input type="password" formControlName="password" placeholder="Password" required autocomplete="off">
-    <input type="password" formControlName="confirmPassword" placeholder="Confirm Password" required autocomplete="off">
-    <input type="text" formControlName="company" placeholder="Company Name" required autocomplete="off">
-    <input type="text" formControlName="ownerName" placeholder="Owner Name" required autocomplete="off">
-    <input type="text" formControlName="address" placeholder="Address" required autocomplete="off">
-    <input type="text" formControlName="email" placeholder="Email" required autocomplete="off">
-    <input type="text" formControlName="gstNumber" placeholder="GST Number" required autocomplete="off">
-    <input type="text" formControlName="telephone" placeholder="Telephone" required autocomplete="off">
-    <input type="submit" value="Register" [disabled]="!signupForm.valid">
+<div class="h-100">
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="d-flex flex-column">
+    <div class="row h-100">
+      <div class="col-sm-6 h-100 mt-5 left-side">
+        <div *ngIf="error!=null">
+          {{error}}
+        </div>
+        <input type="text" formControlName="username" placeholder="Username" required autocomplete="off" class="my-2 form-control w-50">
+        <input type="password" formControlName="password" placeholder="Password" required autocomplete="off" class="my-2 form-control w-50">
+        <input type="password" formControlName="confirmPassword" placeholder="Confirm Password" required autocomplete="off" class="my-2 form-control w-50">
+        <input type="submit" value="Register" [disabled]="!signupForm.valid" class="my-2 btn btn-success w-50">
+        <div>
+          <a routerLink="/">
+            Already have an account?
+          </a>
+        </div>
+      </div>
+      <div class="col-sm-6 form">
+        <input type="text" formControlName="company" placeholder="Company Name" required autocomplete="off" class="my-2 form-control w-50">
+        <input type="text" formControlName="ownerName" placeholder="Owner Name" required autocomplete="off" class="my-2 form-control w-50">
+        <input type="text" formControlName="address" placeholder="Address" required autocomplete="off" class="my-2 form-control w-50">
+        <input type="text" formControlName="email" placeholder="Email" required autocomplete="off" class="my-2 form-control w-50">
+        <input type="text" formControlName="gstNumber" placeholder="GST Number" required autocomplete="off" class="my-2 form-control w-50">
+        <input type="text" formControlName="telephone" placeholder="Telephone" required autocomplete="off" class="my-2 form-control w-50">
+      </div>
+    </div>
   </form>
-  <div *ngIf="error!=null">
-    {{error}}
-  </div>
 </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 
 import { ProductService } from '../product.service';
 import { Product, ProductResponse } from '../models/productResponse';
@@ -15,7 +15,7 @@ export class ProductDetailComponent implements OnInit {
   product: Product;
   isLoading: bolean;
 
-  constructor(private active: ActivatedRoute, private productService: ProductService) {
+  constructor(private active: ActivatedRoute, private productService: ProductService, private route: Router) {
     this.active.params.subscribe( params => {
         this.productId = params.id
     });
@@ -31,6 +31,10 @@ export class ProductDetailComponent implements OnInit {
       this.product = data.payload;
       this.isLoading = false;
     })
+  }
+
+  onEdit() {
+    this.route.navigate([`/edit/${this.productId}`])
   }
 
 }

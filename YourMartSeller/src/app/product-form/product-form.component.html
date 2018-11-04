@@ -18,7 +18,8 @@
       </div>
     </div>
     <div class="d-flex justify-content-center my-5">
-      <input type="submit" value="Add Product" class=" btn btn-success" [disabled]="!productForm.valid">
+      <input *ngIf="!isEditMode" type="submit" value="Add Product" class=" btn btn-success" [disabled]="!productForm.valid">
+      <input *ngIf="isEditMode" type="submit" value="Edit Product" class=" btn btn-success" [disabled]="!productForm.valid">
     </div>
   </form>
 </div>

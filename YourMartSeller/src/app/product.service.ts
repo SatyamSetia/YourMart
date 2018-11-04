@@ -25,4 +25,8 @@ export class ProductService {
   addProduct(product) {
     return this.http.post(`${this.BASE_URL}/products`,product,this.httpOptions);
   }
+
+  editProduct(product) {
+    return this.http.put(`${this.BASE_URL}/products/${product.productId}`,product,this.httpOptions);
+  }
 }

@@ -38,6 +38,25 @@
 			font-size: 0.9rem;
 		}
 		
+		.dropdown {
+		    position: relative;
+		    display: inline-block;
+		}
+		
+		.dropdown-content {
+		    display: none;
+		    position: absolute;
+		    background-color: #f9f9f9;
+		    min-width: 160px;
+		    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+		    padding: 12px 16px;
+		    z-index: 1;
+		}
+		
+		.dropdown:hover .dropdown-content {
+		    display: block;
+		}
+		
 		.nav-link {
 			background: none;
 			border: none;
@@ -85,6 +104,24 @@
 			</div>
 			<div class="col-sm-8">
 				<div class="list-title font-weight-light">Products</div>
+				<form action="searchProducts">
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<div class="dropdown mt-2">
+						  <span class="bg-success text-light p-2 rounded-left">Search by</span>
+						  <div class="dropdown-content">
+						    <input type="radio" name="searchBy" value="sellerProdCode" class="mb-2"> Seller Product Code</br>
+						    <input type="radio" name="searchBy" value="name" class="mb-2"> Product Name</br>
+						    <input type="radio" name="searchBy" value="productId"> Product Id</br>
+						    <input type="radio" name="searchBy" value="sellerId"> Seller Id</br>
+						    <input type="radio" name="searchBy" value="company"> Company Name</br>
+						  </div>
+						</div>
+					</div>
+					<input type="text" class="form-control" placeholder="Enter keywords here" name="keyword">
+					<input type="submit" value="Find">
+				</div>
+				</form>
 				<div>
 					<form>
 						<c:forEach var="product" items="${productList}">

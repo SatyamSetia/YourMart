@@ -8,7 +8,9 @@ import org.springframework.stereotype.Component;
 import com.nagarro.yourmartapi.dao.ProductDao;
 import com.nagarro.yourmartapi.dto.ProductDetails;
 import com.nagarro.yourmartapi.dto.ProductResp;
+import com.nagarro.yourmartapi.dto.ProductStatus;
 import com.nagarro.yourmartapi.dto.Response;
+import com.nagarro.yourmartapi.models.Product;
 import com.nagarro.yourmartapi.services.ProductService;
 
 @Component
@@ -32,5 +34,13 @@ public class ProductServiceImpl implements ProductService {
 
 	public Response<List<ProductResp>> fetchProductsOfSeller(Integer sellerId, String sortBy, List<String> status) {
 		return this.productDao.getAllProductsOfSeller(sellerId, sortBy, status);
+	}
+
+	public void updateProduct(Integer productId, ProductDetails productDetails) {
+		this.productDao.updateProduct(productId, productDetails);
+	}
+
+	public Response<Product> updateProductStatus(Integer productId, ProductStatus productStatus) {
+		return this.productDao.updateProductStatus(productId, productStatus);
 	}
 }
