@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   user: Seller;
   products: [Product];
   isLoading: boolean;
+  count: number;
 
   sortAndFilter = new FormGroup({
     sortBy: new FormControl(''),
@@ -28,6 +29,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private authenticateService: AuthenticateService, private productService: ProductService, private route: Router) {
     this.isLoading = true;
+    this.count = 0;
   }
 
   ngOnInit() {
@@ -99,5 +101,18 @@ export class HomeComponent implements OnInit {
   addProduct() {
     console.log("add")
     this.route.navigate(['/create'])
+  }
+
+  onScroll() {
+    this.count++;
+    if(this.count<1) {
+      this.productService.getAllProductsOfSeller(this.user.sellerId,"?offset="+this.count).subscribe((data: ProductListResponse) => {
+        this.products = [...this.products, data.payload];
+      },err => {
+
+      }, () => {
+        this.isLoading = false;
+      })
+    }
   }
 }

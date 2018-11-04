@@ -26,12 +26,23 @@
 		.details {
 			font-size: 1.2rem;
 		}
+		
+		.logo {
+			color: #ffffff;
+		}
+		
+		.logo:hover {
+			color: #ffffff;
+			text-decoration: none;
+		}
 	</style>
 
 </head>
 <body class="bg-light">
 	<div class="bg-success d-flex justify-content-between p-3 text-light">
-		<span class="font-weight-light title">YourMart</span>
+		<a href="/YourmartAdmin/home?username=abc" class="logo">
+			<span class="font-weight-light title">YourMart</span>
+		</a>
 		<span class="font-weight-light welcome">Welcome <c:out value="${user}" /></span>
 	</div>
 	<div class="text-sm-center m-5 error font-weight-light text-danger"><c:out value="${error}"/></div>

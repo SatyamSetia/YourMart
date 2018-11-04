@@ -17,7 +17,7 @@ public interface ProductDao {
 
 	Response<ProductResp> getProductById(Integer productId);
 
-	Response<List<ProductResp>> getAllProductsOfSeller(Integer sellerId, String sortBy, List<String> status);
+	Response<List<ProductResp>> getAllProductsOfSeller(Integer sellerId, String sortBy, List<String> status, Integer offset);
 
 	void updateProduct(Integer productId, ProductDetails productDetails);
 

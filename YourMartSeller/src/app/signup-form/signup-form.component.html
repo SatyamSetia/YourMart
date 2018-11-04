@@ -2,6 +2,7 @@
   <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="d-flex flex-column">
     <div class="row h-100">
       <div class="col-sm-6 h-100 mt-5 left-side">
+        <h4 class="font-weight-light text-secondary">YourMart</h4>
         <div *ngIf="error!=null">
           {{error}}
         </div>

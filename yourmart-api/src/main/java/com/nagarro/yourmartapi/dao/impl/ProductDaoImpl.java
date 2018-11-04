@@ -32,6 +32,10 @@ public class ProductDaoImpl implements ProductDao {
 		this.session = HibernateUtils.createSession();
 	}
 
+	/**
+	 * @see com.nagarro.yourmartapi.dao.ProductDao#createNewProduct(com.nagarro.yourmartapi.dto.ProductDetails)
+	 * @description Creating new product
+	 */
 	public void createNewProduct(ProductDetails productDetails) {
 		
 		Seller seller = new Seller();
@@ -69,6 +73,9 @@ public class ProductDaoImpl implements ProductDao {
 			
 	}
 
+	/** 
+	 * @description Fetch all products
+	 */
 	public Response<List<ProductResp>> getAllProducts(String sortBy, List<String> status, String searchKeyword,
 			String searchType) {
 		
@@ -181,7 +188,7 @@ public class ProductDaoImpl implements ProductDao {
 		return response;
 	}
 
-	public Response<List<ProductResp>> getAllProductsOfSeller(Integer sellerId, String sortBy, List<String> status) {
+	public Response<List<ProductResp>> getAllProductsOfSeller(Integer sellerId, String sortBy, List<String> status, Integer offset) {
 		
 		String whereClause = "";
 		String sortOrder = "";
@@ -208,6 +215,10 @@ public class ProductDaoImpl implements ProductDao {
 		
 		Query query = this.session.createQuery(HqlQueries.SELECT_PRODUCT_BY_SELLER_ID_FROM_TABLE + whereClause + sortOrder);
 		query.setParameter("sellerId", sellerId);
+		if(!Objects.isNull(offset)) {
+			query.setFirstResult(offset);
+			query.setMaxResults(2);
+		}
 		
 		List<Product> productList = new ArrayList<Product>();
 		

@@ -72,12 +72,22 @@
 			cursor: pointer;
 			text-decoration: underline;
 		}
+		
+		.logo {
+			color: #ffffff;
+		}
+		
+		.logo:hover {
+			color: #ffffff;
+		}
 	
 	</style>
 </head>
 <body class="bg-light">
 	<div class="bg-success d-flex justify-content-between p-3 text-light">
-		<span class="font-weight-light title">YourMart</span>
+		<a href="/YourmartAdmin/home?username=abc" class="logo">
+			<span class="font-weight-light title">YourMart</span>
+		</a>
 		<div class="d-flex">
 			<form action="products">
 				<input type="submit" value="Products" class="nav-link">
@@ -150,7 +160,7 @@
 								</div>
 							</a>
 						</c:forEach>
-						<input type="submit" value="Approve Checked">
+						<input type="submit" value="Approve Checked" class="btn btn-success">
 					</form>
 				</div>
 			</div>

@@ -3,12 +3,14 @@
     <div class="col-sm-6 h-100">
     </div>
     <div class="col-sm-6 form">
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="d-flex flex-column w-50">
+      <h4 class="font-weight-light text-secondary">YourMart</h4>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="d-flex flex-column w-50" id="loginForm">
         <div *ngIf="error!=null" class="d-flex justify-content-center text-danger">
           {{error}}
         </div>
         <input type="text" formControlName="username" placeholder="Username" required autocomplete="off" class="my-2 form-control">
         <input type="password" formControlName="password" placeholder="Password" required autocomplete="off" class="my-2 form-control">
+        <div class="g-recaptcha" data-sitekey="6LcSqHgUAAAAAL2Wul-sVz7QG-IMxo6fzBd8ORUw"></div>
         <input type="submit" value="Login" [disabled]="!loginForm.valid" class="my-2 btn btn-success">
         <a routerLink="/register">
           Need an account?

@@ -28,6 +28,9 @@ export class LoginFormComponent implements OnInit {
   }
 
   onSubmit() {
+    if(grecaptcha.getResponse() == "") {
+        return false
+    }
     this.authenticateService.authenticateUser(this.loginForm.value).subscribe((data: LoginSignupResponse) => {
       console.log(data);
       if(data.status != 200) {

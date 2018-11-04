@@ -31,7 +31,9 @@
           <div class="list-title font-weight-light">Products</div>
           <button class="add-btn rounded" (click)="addProduct()">Add Product</button>
         </div>
-        <app-product-list [products]="products"></app-product-list>
+        <div infiniteScroll (scrolled)="onScroll()">
+          <app-product-list [products]="products"></app-product-list>
+        </div>
       </div>
     </div>
   </div>
