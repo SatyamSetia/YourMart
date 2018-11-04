@@ -16,6 +16,7 @@ import com.nagarro.yourmartapi.dto.ProductDetails;
 import com.nagarro.yourmartapi.dto.ProductResp;
 import com.nagarro.yourmartapi.dto.Response;
 import com.nagarro.yourmartapi.dto.SellerResp;
+import com.nagarro.yourmartapi.models.Gallery;
 import com.nagarro.yourmartapi.models.Product;
 import com.nagarro.yourmartapi.models.Seller;
 import com.nagarro.yourmartapi.models.SellerDetails;
@@ -36,6 +37,7 @@ public class ProductDaoImpl implements ProductDao {
 		seller.setSellerId(productDetails.getSellertId());
 		
 		Product product = new Product();
+		
 		product.setSeller(seller);
 		product.setComments(productDetails.getComments());
 		product.setDimensions(productDetails.getDimensions());
@@ -54,6 +56,13 @@ public class ProductDaoImpl implements ProductDao {
 		this.session.beginTransaction();
 		
 		session.save(product);
+		
+		for(String image: productDetails.getGallery()) {
+			Gallery gallery = new Gallery();
+			gallery.setImage(image);
+			gallery.setProduct(product);
+			session.save(gallery);
+		}
 		
 		this.session.getTransaction().commit();
 			
@@ -117,6 +126,7 @@ public class ProductDaoImpl implements ProductDao {
 			prod.setYmp(product.getYmp());
 			prod.setSsp(product.getSsp());
 			prod.setSellerId(product.getSeller().getSellerId());
+			prod.setGallery(getAllImages(product.getProductId()));
 			
 			productList.add(prod);
 		}
@@ -164,6 +174,7 @@ public class ProductDaoImpl implements ProductDao {
 		productResponse.setStatus(product.getStatus());
 		productResponse.setUsageInstructions(product.getUsageInstructions());
 		productResponse.setYmp(product.getYmp());
+		productResponse.setGallery(getAllImages(product.getProductId()));
 		
 		Response<ProductResp> response = new Response<ProductResp>(200,productResponse,null);
 		
@@ -235,6 +246,7 @@ public class ProductDaoImpl implements ProductDao {
 			prod.setYmp(product.getYmp());
 			prod.setSsp(product.getSsp());
 			prod.setSellerId(product.getSeller().getSellerId());
+			prod.setGallery(getAllImages(product.getProductId()));
 			
 			list.add(prod);
 		}
@@ -242,6 +254,16 @@ public class ProductDaoImpl implements ProductDao {
 		response = new Response<List<ProductResp>>(ResponseCodesAndMessages.SUCCESS, list, null);
 		
 		return response;
+	}
+	
+	public List<String> getAllImages(Integer productId) {
+		
+		Query query = this.session.createQuery(HqlQueries.SELECT_IMAGES_FROM_GALLERY);
+		query.setParameter("productId", productId);
+		
+		List<String> images = query.list();
+		
+		return images;
 	}
 
 }

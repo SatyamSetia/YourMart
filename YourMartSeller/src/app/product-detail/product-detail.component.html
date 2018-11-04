@@ -1,0 +1,61 @@
+<div *ngIf="isLoading; else isLoaded">
+
+</div>
+<ng-template #isLoaded>
+  <div class="container">
+      <div class="row my-5 box shadow rounded py-3">
+        <div class="col-sm-6 d-flex justify-content-center">
+          <img src="{{product.primaryImage}}" class="p-image rounded">
+        </div>
+        <div class="col-sm-6">
+          <div class="d-flex justify-content-between">
+            <div>
+              <h2 class="font-weight-light">{{product.name}}</h2>
+              <span class="text-secondary">Product Id: {{productId}}</span>
+            </div>
+            <div class="py-3">
+              <h5>{{product.status}}</h5>
+            </div>
+          </div>
+          <div class="my-3">
+            <table class="table table-hover">
+              <tbody>
+                <tr>
+                  <td>Product Code</td>
+                  <td>{{product.sellerProdCode}}</td>
+                </tr>
+                <tr>
+                  <td>Short description</td>
+                  <td>{{product.shortDesc}}</td>
+                </tr>
+                <tr>
+                  <td>Long Description</td>
+                  <td>{{product.longDesc}}</td>
+                </tr>
+                <tr>
+                  <td>Dimensions</td>
+                  <td>{{product.dimensions}}</td>
+                </tr>
+                <tr>
+                  <td>MRP</td>
+                  <td>{{product.mrp}}</td>
+                </tr>
+                <tr>
+                  <td>SSP</td>
+                  <td>{{product.ssp}}</td>
+                </tr>
+                <tr>
+                  <td>YMP</td>
+                  <td>{{product.ymp}}</td>
+                </tr>
+                <tr>
+                  <td>Comments</td>
+                  <td>{{product.comments}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+  </div>
+</ng-template>

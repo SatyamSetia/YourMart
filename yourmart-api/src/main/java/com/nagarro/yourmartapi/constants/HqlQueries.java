@@ -20,4 +20,6 @@ public class HqlQueries {
 
 	public static final String SELECT_PRODUCT_BY_SELLER_ID_FROM_TABLE = "FROM "+Models.PRODUCT_MODEL +" as dbProduct WHERE dbProduct.seller.sellerId = :sellerId";
 
+	public static final String SELECT_IMAGES_FROM_GALLERY = "SELECT dbGallery.image FROM " + Models.GALLERY_MODEL + " as dbGallery WHERE dbGallery.product.productId = :productId";
+
 }

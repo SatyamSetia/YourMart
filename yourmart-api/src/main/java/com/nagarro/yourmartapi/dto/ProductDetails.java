@@ -1,5 +1,7 @@
 package com.nagarro.yourmartapi.dto;
 
+import java.util.List;
+
 public class ProductDetails {
 	
 	private Integer sellerId;
@@ -29,6 +31,8 @@ public class ProductDetails {
 	private String status;
 	
 	private String usageInstructions;
+	
+	private List<String> gallery;
 
 	public Integer getSellertId() {
 		return sellerId;
@@ -140,6 +144,14 @@ public class ProductDetails {
 
 	public void setUsageInstructions(String usageInstructions) {
 		this.usageInstructions = usageInstructions;
+	}
+	
+	public List<String> getGallery() {
+		return gallery;
+	}
+
+	public void setGallery(List<String> gallery) {
+		this.gallery = gallery;
 	}
 	
 }

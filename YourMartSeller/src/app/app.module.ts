@@ -10,6 +10,8 @@ import { SignupFormComponent } from './signup-form/signup-form.component';
 import { HomeComponent } from './home/home.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductListItemComponent } from './product-list-item/product-list-item.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { ProductFormComponent } from './product-form/product-form.component';
 
 const routes: Routes = [
   {
@@ -21,6 +23,12 @@ const routes: Routes = [
   }, {
     path: 'home',
     component: HomeComponent
+  }, {
+    path: 'product/:id',
+    component: ProductDetailComponent
+  }, {
+    path: 'create',
+    component: ProductFormComponent
   }
 ]
 
@@ -32,6 +40,8 @@ const routes: Routes = [
     HomeComponent,
     ProductListComponent,
     ProductListItemComponent,
+    ProductDetailComponent,
+    ProductFormComponent,
   ],
   imports: [
     BrowserModule,

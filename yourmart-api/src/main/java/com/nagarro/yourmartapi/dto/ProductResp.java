@@ -1,6 +1,7 @@
 package com.nagarro.yourmartapi.dto;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import com.nagarro.yourmartapi.models.Seller;
 
@@ -36,6 +37,8 @@ public class ProductResp {
 	
 	private String usageInstructions;
 	
+	private List<String> gallery;
+
 	private LocalDateTime createdAt;
 	
 	private LocalDateTime updatedAt;
@@ -158,6 +161,14 @@ public class ProductResp {
 
 	public void setUsageInstructions(String usageInstructions) {
 		this.usageInstructions = usageInstructions;
+	}
+	
+	public List<String> getGallery() {
+		return gallery;
+	}
+
+	public void setGallery(List<String> gallery) {
+		this.gallery = gallery;
 	}
 
 	public LocalDateTime getCreatedAt() {

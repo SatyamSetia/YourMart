@@ -9,3 +9,14 @@
 .list-title {
   font-size: 2rem;
 }
+
+.add-btn {
+	background: none;
+	border: none;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.add-btn:hover {
+	background: #EAEDED;
+}

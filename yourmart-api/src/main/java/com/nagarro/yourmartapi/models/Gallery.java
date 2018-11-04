@@ -1,11 +1,28 @@
 package com.nagarro.yourmartapi.models;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "gallery")
 public class Gallery {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "image_id", unique = true, nullable = false)
 	private Integer imageId;
 	
-	private Integer productId;
+	@ManyToOne(optional=false)
+    @JoinColumn(name="product_id")
+	private Product product;
 	
+	@Column(name="image", nullable=false)
 	private String image;
 
 	public Integer getImageId() {
@@ -16,12 +33,12 @@ public class Gallery {
 		this.imageId = imageId;
 	}
 
-	public Integer getProductId() {
-		return productId;
+	public Product getProduct() {
+		return product;
 	}
 
-	public void setProductId(Integer productId) {
-		this.productId = productId;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 	public String getImage() {

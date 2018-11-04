@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Router } from "@angular/router";
 
 import { AuthenticateService } from '../authenticate.service';
 import { ProductService } from '../product.service';
@@ -25,7 +26,7 @@ export class HomeComponent implements OnInit {
     approved: new FormControl('')
   })
 
-  constructor(private authenticateService: AuthenticateService, private productService: ProductService) {
+  constructor(private authenticateService: AuthenticateService, private productService: ProductService, private route: Router) {
     this.isLoading = true;
   }
 
@@ -93,4 +94,10 @@ export class HomeComponent implements OnInit {
     }
 
     this.fetchAllProducts(queryString);
+  }
+
+  addProduct() {
+    console.log("add")
+    this.route.navigate(['/create'])
+  }
 }

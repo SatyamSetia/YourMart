@@ -2,6 +2,7 @@ export interface Product {
   comments: String,
   createdAt: String,
   dimensions: String,
+  gallery: Array<String>,
   longDesc: String,
   mrp: number,
   name: number,

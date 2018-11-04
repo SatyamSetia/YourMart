@@ -30,7 +30,10 @@
 				</div>
       </div>
       <div class="col-sm-8">
-        <div class="list-title font-weight-light">Products</div>
+        <div class="d-flex justify-content-between">
+          <div class="list-title font-weight-light">Products</div>
+          <button class="add-btn rounded" (click)="addProduct()">Add Product</button>
+        </div>
         <app-product-list [products]="products"></app-product-list>
       </div>
     </div>

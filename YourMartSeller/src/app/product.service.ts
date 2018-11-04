@@ -13,4 +13,8 @@ export class ProductService {
   getAllProductsOfSeller(sellerId, queryString) {
     return this.http.get(`${this.BASE_URL}/products/seller/${sellerId}${queryString}`);
   }
+
+  getProduct(productId) {
+    return this.http.get(`${this.BASE_URL}/products/${productId}`);
+  }
 }
